@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { CalendarIcon, MapPin, ArrowRight, Search } from 'lucide-react';
 import { SearchParams } from '@/types/travel';
+import { CityAutocomplete } from './CityAutocomplete';
 
 interface SearchFormProps {
   onSearch: (params: SearchParams) => void;
@@ -30,28 +30,22 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">From</label>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Origin city"
-                value={origin}
-                onChange={(e) => setOrigin(e.target.value)}
-                className="pl-10"
-              />
-            </div>
+            <CityAutocomplete
+              value={origin}
+              onChange={setOrigin}
+              placeholder="Origin city"
+              icon={<MapPin className="h-4 w-4" />}
+            />
           </div>
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">To</label>
-            <div className="relative">
-              <ArrowRight className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Destination city"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                className="pl-10"
-              />
-            </div>
+            <CityAutocomplete
+              value={destination}
+              onChange={setDestination}
+              placeholder="Destination city"
+              icon={<ArrowRight className="h-4 w-4" />}
+            />
           </div>
 
           <div className="space-y-2">
