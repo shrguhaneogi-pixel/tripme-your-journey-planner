@@ -20,7 +20,9 @@ export interface TravelOption {
 
 export interface SearchParams {
   origin: string;
+  originCode: string;
   destination: string;
+  destinationCode: string;
   date: Date | undefined;
   returnDate?: Date | undefined;
   tripType: 'one-way' | 'round-trip';
