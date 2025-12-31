@@ -15,7 +15,9 @@ interface SearchFormProps {
 
 export const SearchForm = ({ onSearch }: SearchFormProps) => {
   const [origin, setOrigin] = useState('');
+  const [originCode, setOriginCode] = useState('');
   const [destination, setDestination] = useState('');
+  const [destinationCode, setDestinationCode] = useState('');
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [returnDate, setReturnDate] = useState<Date | undefined>();
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way');
@@ -24,8 +26,18 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (origin && destination) {
-      onSearch({ origin, destination, date, returnDate: tripType === 'round-trip' ? returnDate : undefined, tripType, adults, children });
+    if (origin && destination && originCode && destinationCode) {
+      onSearch({ 
+        origin, 
+        originCode,
+        destination, 
+        destinationCode,
+        date, 
+        returnDate: tripType === 'round-trip' ? returnDate : undefined, 
+        tripType, 
+        adults, 
+        children 
+      });
     }
   };
 
@@ -45,7 +57,10 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
             <label className="text-sm font-medium text-foreground">From</label>
             <CityAutocomplete
               value={origin}
-              onChange={setOrigin}
+              onChange={(name, code) => {
+                setOrigin(name);
+                if (code) setOriginCode(code);
+              }}
               placeholder="Origin city"
               icon={<MapPin className="h-4 w-4" />}
             />
@@ -57,8 +72,12 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
             size="icon"
             className="mb-0.5"
             onClick={() => {
+              const tempOrigin = origin;
+              const tempOriginCode = originCode;
               setOrigin(destination);
-              setDestination(origin);
+              setOriginCode(destinationCode);
+              setDestination(tempOrigin);
+              setDestinationCode(tempOriginCode);
             }}
             aria-label="Swap cities"
           >
@@ -69,7 +88,10 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
             <label className="text-sm font-medium text-foreground">To</label>
             <CityAutocomplete
               value={destination}
-              onChange={setDestination}
+              onChange={(name, code) => {
+                setDestination(name);
+                if (code) setDestinationCode(code);
+              }}
               placeholder="Destination city"
               icon={<MapPin className="h-4 w-4" />}
             />

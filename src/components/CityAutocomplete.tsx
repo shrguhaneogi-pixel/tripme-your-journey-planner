@@ -3,9 +3,14 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { cities } from '@/data/mockTravelData';
 
+interface City {
+  name: string;
+  code: string;
+}
+
 interface CityAutocompleteProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: string, code: string) => void;
   placeholder?: string;
   icon?: React.ReactNode;
 }
@@ -17,16 +22,17 @@ export const CityAutocomplete = ({
   icon,
 }: CityAutocompleteProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [filteredCities, setFilteredCities] = useState<string[]>([]);
+  const [filteredCities, setFilteredCities] = useState<City[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (value) {
       const filtered = cities.filter((city) =>
-        city.toLowerCase().includes(value.toLowerCase())
+        city.name.toLowerCase().includes(value.toLowerCase()) ||
+        city.code.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredCities(filtered);
-      setIsOpen(filtered.length > 0 && value !== filtered[0]);
+      setIsOpen(filtered.length > 0 && value !== filtered[0]?.name);
     } else {
       setFilteredCities(cities);
       setIsOpen(false);
@@ -44,15 +50,16 @@ export const CityAutocomplete = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSelect = (city: string) => {
-    onChange(city);
+  const handleSelect = (city: City) => {
+    onChange(city.name, city.code);
     setIsOpen(false);
   };
 
   const handleFocus = () => {
     if (value) {
       const filtered = cities.filter((city) =>
-        city.toLowerCase().includes(value.toLowerCase())
+        city.name.toLowerCase().includes(value.toLowerCase()) ||
+        city.code.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredCities(filtered);
       setIsOpen(filtered.length > 0);
@@ -73,7 +80,7 @@ export const CityAutocomplete = ({
         <Input
           placeholder={placeholder}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e.target.value, '')}
           onFocus={handleFocus}
           className={cn(icon && 'pl-10')}
         />
@@ -82,15 +89,16 @@ export const CityAutocomplete = ({
         <div className="absolute z-50 w-full mt-1 bg-popover border border-border rounded-md shadow-lg max-h-60 overflow-auto">
           {filteredCities.map((city) => (
             <button
-              key={city}
+              key={city.code}
               type="button"
               onClick={() => handleSelect(city)}
               className={cn(
                 'w-full px-4 py-2 text-left text-sm hover:bg-accent hover:text-accent-foreground transition-colors',
-                city === value && 'bg-accent text-accent-foreground'
+                city.name === value && 'bg-accent text-accent-foreground'
               )}
             >
-              {city}
+              <span className="font-medium">{city.name}</span>
+              <span className="ml-2 text-muted-foreground">({city.code})</span>
             </button>
           ))}
         </div>

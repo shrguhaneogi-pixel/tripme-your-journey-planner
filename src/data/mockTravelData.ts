@@ -165,20 +165,32 @@ export const popularRoutes = [
   { origin: 'Boston', destination: 'Washington DC' },
 ];
 
+// Cities with IATA airport codes for API compatibility
 export const cities = [
-  'New York',
-  'Miami',
-  'Los Angeles',
-  'San Francisco',
-  'Chicago',
-  'Detroit',
-  'Seattle',
-  'Vancouver',
-  'Boston',
-  'Washington DC',
-  'Houston',
-  'Dallas',
-  'Atlanta',
-  'Denver',
-  'Phoenix',
+  { name: 'New York', code: 'JFK' },
+  { name: 'Miami', code: 'MIA' },
+  { name: 'Los Angeles', code: 'LAX' },
+  { name: 'San Francisco', code: 'SFO' },
+  { name: 'Chicago', code: 'ORD' },
+  { name: 'Detroit', code: 'DTW' },
+  { name: 'Seattle', code: 'SEA' },
+  { name: 'Boston', code: 'BOS' },
+  { name: 'Washington DC', code: 'DCA' },
+  { name: 'Houston', code: 'IAH' },
+  { name: 'Dallas', code: 'DFW' },
+  { name: 'Atlanta', code: 'ATL' },
+  { name: 'Denver', code: 'DEN' },
+  { name: 'Phoenix', code: 'PHX' },
+  { name: 'Las Vegas', code: 'LAS' },
+  { name: 'Orlando', code: 'MCO' },
+  { name: 'London', code: 'LHR' },
+  { name: 'Paris', code: 'CDG' },
+  { name: 'Tokyo', code: 'NRT' },
+  { name: 'Dubai', code: 'DXB' },
 ];
+
+// Helper to get city code
+export const getCityCode = (cityName: string): string | undefined => {
+  const city = cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
+  return city?.code;
+};
