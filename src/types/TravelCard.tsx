@@ -14,6 +14,7 @@ export interface TravelOption {
   price: number;
   origin: string;
   destination: string;
+  bookingUrl: string;
   amenities?: string[];
   class?: string;
 }
