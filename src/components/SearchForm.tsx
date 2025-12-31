@@ -4,7 +4,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
-import { CalendarIcon, MapPin, ArrowRight, Search } from 'lucide-react';
+import { CalendarIcon, MapPin, ArrowRightLeft, Search } from 'lucide-react';
 import { SearchParams } from '@/types/travel';
 import { CityAutocomplete } from './CityAutocomplete';
 
@@ -27,7 +27,7 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto">
       <div className="bg-card rounded-xl shadow-lg p-6 border border-border">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_1fr_auto] gap-4 items-end">
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">From</label>
             <CityAutocomplete
@@ -38,13 +38,27 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
             />
           </div>
 
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="mb-0.5"
+            onClick={() => {
+              setOrigin(destination);
+              setDestination(origin);
+            }}
+            aria-label="Swap cities"
+          >
+            <ArrowRightLeft className="h-4 w-4" />
+          </Button>
+
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">To</label>
             <CityAutocomplete
               value={destination}
               onChange={setDestination}
               placeholder="Destination city"
-              icon={<ArrowRight className="h-4 w-4" />}
+              icon={<MapPin className="h-4 w-4" />}
             />
           </div>
 
