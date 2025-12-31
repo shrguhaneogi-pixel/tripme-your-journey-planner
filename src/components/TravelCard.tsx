@@ -83,6 +83,7 @@ export const TravelCard = ({ option }: TravelCardProps) => {
               </div>
             )}
           </div>
+          
 
           {/* Right section with price */}
           <div className="p-4 md:p-6 flex flex-row md:flex-col items-center justify-between md:justify-center gap-4 border-t md:border-t-0 md:border-l border-border bg-accent/30 md:min-w-[150px]">
@@ -93,7 +94,9 @@ export const TravelCard = ({ option }: TravelCardProps) => {
                 <span className="text-3xl font-bold text-foreground">{option.price}</span>
               </div>
             </div>
-            <Button className="w-full md:w-auto">Select</Button>
+            <a href={option.bookingUrl} target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
+              <Button className="w-full">Select</Button>
+            </a>
           </div>
         </div>
       </CardContent>
