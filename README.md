@@ -13,15 +13,16 @@ Intelligent Itinerary Matching: The system dynamically filters available flight 
 
 Real-time Simulation: Simulates the end-to-end booking flow, from query to confirmation, providing an instant feedback loop.
 
-Responsive UI: A clean, minimal interface (frontend16.html) that focuses purely on the conversation and results.
+Responsive UI: A clean, minimal interface that focuses purely on the conversation and results.
 
 # 🛠️ Tech Stack
 ### Frontend: HTML5, CSS3, Vanilla JavaScript (simplicity for speed)
 
 ### Backend: Node.js, Express.js (handling API requests)
 
-### AI/LLM Integration: Google Gemini API
+### AI/LLM Integration: AMADEUS, Google Gemini API
 
 ### Environment Management: Dotenv for secure API key handling
 
 <img width="1024" height="572" alt="image" src="https://github.com/user-attachments/assets/445ab477-2905-4dab-8b9c-5283a4bf3dc5" />
+**Submission for GlobalGenAI Hackathon by ML KOLKATA**
