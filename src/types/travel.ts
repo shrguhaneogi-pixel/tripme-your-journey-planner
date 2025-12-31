@@ -22,4 +22,8 @@ export interface SearchParams {
   origin: string;
   destination: string;
   date: Date | undefined;
+  returnDate?: Date | undefined;
+  tripType: 'one-way' | 'round-trip';
+  adults: number;
+  children: number;
 }
