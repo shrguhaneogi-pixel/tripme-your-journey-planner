@@ -25,4 +25,4 @@ Responsive UI: A clean, minimal interface that focuses purely on the conversatio
 ### Environment Management: Dotenv for secure API key handling
 
 <img width="1024" height="572" alt="image" src="https://github.com/user-attachments/assets/445ab477-2905-4dab-8b9c-5283a4bf3dc5" />
-**Submission for GlobalGenAI Hackathon by ML KOLKATA**
+__Submission for GlobalGenAI Hackathon by ML KOLKATA__
